@@ -28,9 +28,14 @@ app.get("/api/hello", function (req, res) {
 app.get("/date/:dateStr", function(req, res) {
   console.log("input >> " + req.params.dateStr);
   let resDate = new Date(Number.parseInt(req.params.dateStr));
-  return res.json({ "unix": req.params.dateStr, "utc": resDate.toString() });
+  if (Number.parseInt(req.params.dateStr)) {
+    console.log(req.params.dateStr + " is a number");
+    return res.json({ "unix": resDate, "utc": resDate.toString() });
+  } else {
+    console.log(req.params.dateStr + " is not a number");
+    return res.json({ "error": resDate.toString() });
+  }
 });
-
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
