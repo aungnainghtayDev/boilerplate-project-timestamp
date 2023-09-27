@@ -24,6 +24,12 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// getting date time API ...
+app.get("/date/:dateStr", function(req, res) {
+  console.log("input >> " + req.params.dateStr);
+  let resDate = new Date(Number.parseInt(req.params.dateStr));
+  return res.json({ "unix": req.params.dateStr, "utc": resDate.toString() });
+});
 
 
 // listen for requests :)
